@@ -3,17 +3,17 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')   // Jenkins credential ID (username+password)
-        DOCKERHUB_USERNAME    = 'your-dockerhub-username'
+        DOCKERHUB_USERNAME    = 'anukavb'
         IMAGE_NAME            = "${DOCKERHUB_USERNAME}/devops-project-app"
         IMAGE_TAG             = "${BUILD_NUMBER}"
-        EC2_HOST              = 'ubuntu@<EC2_PUBLIC_IP>'          // fill in after terraform apply
+        EC2_HOST              = 'ubuntu@13.232.245.249'          // fill in after terraform apply
         APP_PORT              = '5000'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/<your-username>/<your-repo>.git'
+                git branch: 'main', url: 'https://github.com/anukavb/webapp-deploy-project.git'
             }
         }
 
