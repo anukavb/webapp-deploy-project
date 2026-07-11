@@ -68,8 +68,8 @@ pipeline {
 
         stage('Deploy to EC2') {
             steps {
-                sshagent(credentials: ['ec2-ssh-key']) {   // SSH private key credential in Jenkins
-                    bat "ssh -o StrictHostKeyChecking=no %EC2_HOST% \"docker pull %IMAGE_NAME%:latest && docker stop app-container || true && docker rm app-container || true && docker run -d --name app-container -p 80:%APP_PORT% %IMAGE_NAME%:latest\""
+                withCredentials([sshUserPrivateKey(credentialsId: 'ec2-ssh-key', keyFileVariable: 'SSH_KEY', usernameVariable: 'SSH_USER')]) {
+                    bat "ssh -o StrictHostKeyChecking=no -i %SSH_KEY% %SSH_USER%@13.232.245.249 \"docker pull %IMAGE_NAME%:latest && docker stop app-container || true && docker rm app-container || true && docker run -d --name app-container -p 80:%APP_PORT% %IMAGE_NAME%:latest\""
                 }
             }
         }
