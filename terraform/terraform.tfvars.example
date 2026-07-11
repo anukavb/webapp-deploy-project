@@ -1,0 +1,5 @@
+# Copy this file to terraform.tfvars and fill in your own values.
+# terraform.tfvars should NOT be committed to GitHub (it's in .gitignore below).
+
+key_name = "your-ec2-keypair-name"   # created manually in AWS EC2 console
+my_ip    = "203.0.113.10/32"          # run `curl ifconfig.me` to find your IP
